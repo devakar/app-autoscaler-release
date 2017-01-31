@@ -1,5 +1,5 @@
 ---
-dbs:
+default_dbs: 
   databases:
     - name: autoscaler
       tag: default
@@ -61,4 +61,6 @@ scalingengine_properties:
 eventgenerator_properties:
   logging:
     level: debug
+
+dbs: (( merge  || default_dbs ))
 

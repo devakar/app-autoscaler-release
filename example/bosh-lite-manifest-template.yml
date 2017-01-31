@@ -37,7 +37,7 @@ instance_groups:
   - name: postgres
     azs:
       - z1
-    instances: 1
+    instances: (( instance_count_overrides.postgres.instances || 1 ))
     update:
       serial: true
     stemcell: default
@@ -317,3 +317,5 @@ pruner_properties: ((merge))
 metricscollector_properties: (( merge ))
 eventgenerator_properties: (( merge ))
 scalingengine_properties: (( merge ))
+instance_count_overrides: (( merge || nil ))
+

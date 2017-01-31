@@ -1,0 +1,4 @@
+---
+instance_count_overrides:
+  - name: postgres
+    instances: 0
