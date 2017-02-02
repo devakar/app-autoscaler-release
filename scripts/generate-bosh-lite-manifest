@@ -16,14 +16,12 @@ MANDATORY ARGUMENTS:
     -p <property-path>          Path to property-overrides stub file.
 OPTIONAL ARGUMENTS:
     -s <postgresql-db-stub-path>     Path to PostgreSQL stub file.
-    -n <instance-count-path>         Path to instance-count-overrides stub file.
 EXAMPLE:
     $0 \\
       -c ../cf-release/bosh-lite/deployments/cf.yml \\
       -i ./example/cloud-config.yml \\
       -p ./example/property-overrides.yml \\
       -s ./example/postgresql.yml \\
-      -n ./example/instance-count-overrides.yml \\
 EOF
   exit 1
 }
@@ -42,9 +40,6 @@ while getopts "c:i:p:s:n:" opt; do
         ;;
     s)
         postgres_settings=$OPTARG
-        ;;
-    n)
-        instance_counts=$OPTARG
         ;;
     *)  echo "Unknown arguments"
         usage
@@ -89,9 +84,8 @@ if [[ ! -z "${postgres_settings}" && ! -f "${postgres_settings}" ]]; then
   argument_error=true
 fi
 
-if [[ ! -z "${instance_counts}" && ! -f "${instance_counts}" ]]; then
-  >&2 echo "ERROR: Instance-count-overrides stub '${instance_counts}' is not a regular file"
-  argument_error=true
+if [ ! -z ${postgres_settings} ]; then
+  defualt_db_instance=0
 fi
 
 if [ ! -z $argument_error ]; then
@@ -112,6 +106,9 @@ fi
 tmpdir=$(mktemp -d /tmp/autoscaler-bosh-lite-manifest.XXXXX)
 director_uuid=${tmpdir}/director.yml
 printf "director_uuid: %s" $(bosh status --uuid) > ${director_uuid}
+instance_counts=${tmpdir}/instance_counts.yml
+# If user specifies DB configuations, we will not provide default postgres
+printf "postgres_instance_count_overrides: %s" $defualt_db_instance > ${instance_counts}
 
 # Check for spiff installation
 which spiff > /dev/null 2>&1 || {

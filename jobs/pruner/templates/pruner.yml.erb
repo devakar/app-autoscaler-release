@@ -2,28 +2,43 @@
   def p_arr(property)
     p(property,nil) || []
   end
-  db_scheme = p('databases.db_scheme')
-  address = p('databases.address')
-  db_port = p('databases.port')
-  role = p_arr('databases.roles').find { |role| role['tag'] == 'default' } 
-  database = p_arr('databases.databases').find { |database| database['tag'] == 'default' } 
-  dburl = db_scheme + "://" + role['name'] + ":" + role['password'] + "@" + address + ":" + db_port.to_s + "/" + database['name'] + "?sslmode=disable"
+  imdb_db_scheme = p('instancemetrics_db.db_scheme')
+  imdb_address = p('instancemetrics_db.address')
+  imdb_db_port = p('instancemetrics_db.port')
+  imdb_role = p_arr('instancemetrics_db.roles').find { |role| role['tag'] == 'instancemetricsdb' or role['tag'] == 'default' } 
+  imdb_database = p_arr('instancemetrics_db.databases').find { |database| database['tag'] == 'instancemetricsdb' or database['tag'] == 'default' } 
+  im_dburl = imdb_db_scheme + "://" + imdb_role['name'] + ":" + imdb_role['password'] + "@" + imdb_address + ":" + imdb_db_port.to_s + "/" + imdb_database['name'] + "?sslmode=disable"
+  
+  apm_db_scheme = p('appmetrics_db.db_scheme')
+  apm_address = p('appmetrics_db.address')
+  apm_db_port = p('appmetrics_db.port')
+  apm_role = p_arr('appmetrics_db.roles').find { |role| role['tag'] == 'appmetricsdb' or role['tag'] == 'default' }
+  apm_database = p_arr('appmetrics_db.databases').find { |database| database['tag'] == 'appmetricsdb' or database['tag'] == 'default' }
+  apm_dburl = apm_db_scheme + "://" + apm_role['name'] + ":" + apm_role['password'] + "@" + apm_address + ":" + apm_db_port.to_s + "/" + apm_database['name'] + "?sslmode=disable"
+
+  sce_db_scheme = p('scalingengine_db.db_scheme')
+  sce_address = p('scalingengine_db.address')
+  sce_db_port = p('scalingengine_db.port')
+  sce_role = p_arr('scalingengine_db.roles').find { |role| role['tag'] == 'scalingdb' or role['tag'] == 'default' }
+  sce_database = p_arr('scalingengine_db.databases').find { |database| database['tag'] == 'scalingdb' or database['tag'] == 'default' }
+  sce_dburl = sce_db_scheme + "://" + sce_role['name'] + ":" + sce_role['password'] + "@" + sce_address + ":" + sce_db_port.to_s + "/" + sce_database['name'] + "?sslmode=disable"
+
 %>
 
 logging:
   level: <%= p("pruner.logging.level") %>
 
 instance_metrics_db:
-  db_url: <%= dburl %>
+  db_url: <%= im_dburl %>
   refresh_interval: <%= p("pruner.instance_metrics_db.refresh_interval") %>
   cutoff_days: <%= p("pruner.instance_metrics_db.cutoff_days") %>
 
 app_metrics_db:
-  db_url: <%= dburl %>
+  db_url: <%= apm_dburl %>
   refresh_interval: <%= p("pruner.app_metrics_db.refresh_interval") %>
   cutoff_days: <%= p("pruner.app_metrics_db.cutoff_days") %>
 
 scaling_engine_db:
-  db_url: <%= dburl %>
+  db_url: <%= sce_dburl %>
   refresh_interval: <%= p("pruner.scaling_engine_db.refresh_interval") %>
   cutoff_days: <%= p("pruner.scaling_engine_db.cutoff_days") %>

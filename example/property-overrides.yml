@@ -62,5 +62,9 @@ eventgenerator_properties:
   logging:
     level: debug
 
-dbs: (( merge  || default_dbs ))
-
+policydb: (( merge || default_dbs ))
+schedulerdb: (( merge || default_dbs ))
+scalingdb: ((  merge || default_dbs ))
+appmetricsdb: (( merge || default_dbs ))
+instancemetricsdb: (( merge || default_dbs ))
+bindingdb: (( merge || default_dbs ))

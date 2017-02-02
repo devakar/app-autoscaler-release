@@ -1,13 +1,55 @@
 ---
-dbs:
+
+policydb:
   address: 10.0.2.2
   databases:
-    - name: autoscaler
-      tag: default
-  db_scheme: postgres
+    - {name: policydb, tag: policydb}
+  db_scheme: postgresql
   port: 5432
   roles:
-    - name: postgres
-      password: postgres
-      tag: default
+    - {name: postgres, password: postgres, tag: policydb}
 
+schedulerdb:
+  address: 10.0.2.2
+  databases:
+    - {name: schedulerdb, tag: schedulerdb}
+  db_scheme: postgresql
+  port: 5432
+  roles:
+    - {name: postgres, password: postgres, tag: schedulerdb}
+
+scalingdb:
+  address: 10.0.2.2
+  databases:
+    - {name: scalingdb, tag: scalingdb}
+  db_scheme: postgresql
+  port: 5432
+  roles:
+    - {name: postgres, password: postgres, tag: scalingdb}
+
+appmetricsdb:
+  address: 10.0.2.2
+  databases:
+    - {name: appmetricsdb, tag: appmetricsdb}
+  db_scheme: postgresql
+  port: 5432
+  roles:
+    - {name: postgres, password: postgres, tag: appmetricsdb}
+
+instancemetricsdb:
+  address: 10.0.2.2
+  databases:
+    - {name: instancemetricsdb, tag: instancemetricsdb}
+  db_scheme: postgresql
+  port: 5432
+  roles:
+    - {name: postgres, password: postgres, tag: instancemetricsdb}
+
+bindingdb:
+  address: 10.0.2.2
+  databases:
+    - {name: bindingdb, tag: bindingdb}
+  db_scheme: postgresql
+  port: 5432
+  roles:
+    - {name: postgres, password: postgres, tag: bindingdb}

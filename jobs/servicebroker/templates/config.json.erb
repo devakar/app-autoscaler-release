@@ -4,11 +4,11 @@
     p(property,nil) || []
   end
 
-  db_scheme = p('databases.db_scheme')
-  address = p('databases.address')
-  db_port = p('databases.port')
-  role = p_arr('databases.roles').find { |role| role['tag'] == 'default' } 
-  database = p_arr('databases.databases').find { |database| database['tag'] == 'default' } 
+  db_scheme = p('binding_db.db_scheme')
+  address = p('binding_db.address')
+  db_port = p('binding_db.port')
+  role = p_arr('binding_db.roles').find { |role| role['tag'] == 'bindingdb' or role['tag'] == 'default'} 
+  database = p_arr('binding_db.databases').find { |database| database['tag'] == 'bindingdb' or database['tag'] == 'default'} 
   apiserverHost = p('service_broker.api_server_host')
   apiserverPort = p('service_broker.api_server_port')
   params = {

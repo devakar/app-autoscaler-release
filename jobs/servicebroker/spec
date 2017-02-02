@@ -37,16 +37,16 @@ properties:
     description: "The idle timeout for connections (seconds)"
   service_broker.http_request_timeout:
     description: "The timeout for http request"
-  databases.address:
+  binding_db.address:
     description: "IP address on which the Postgresql server will listen"
     default: "postgres.service.cf.internal"
-  databases.databases:
+  binding_db.databases:
     description: "The list of databases used in Postgresql database including name"
-  databases.db_scheme:
+  binding_db.db_scheme:
     description: "Database scheme to be used to access Postgresql"
-  databases.port:
+  binding_db.port:
     description: "Port on which the Postgresql server will listen"
-  databases.roles:
+  binding_db.roles:
     description: "The list of database Roles used in Postgresql database including name/password"
 
 

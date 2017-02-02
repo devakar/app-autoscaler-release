@@ -13,17 +13,30 @@ packages:
   - common
 
 properties:
-  databases.address:
+  policy_db.address:
     description: "IP address on which the Postgresql server will listen"
     default: "postgres.service.cf.internal"
-  databases.databases:
+  policy_db.databases:
     description: "The list of databases used in Postgresql database including name"
-  databases.db_scheme:
+  policy_db.db_scheme:
     description: "Database scheme to be used to access Postgresql"
-  databases.port:
+  policy_db.port:
     description: "Port on which the Postgresql server will listen"
-  databases.roles:
+  policy_db.roles:
     description: "The list of database Roles used in Postgresql database including name/password"
+
+  instancemetrics_db.address:
+    description: "IP address on which the Postgresql server will listen"
+    default: "postgres.service.cf.internal"
+  instancemetrics_db.databases:
+    description: "The list of databases used in Postgresql database including name"
+  instancemetrics_db.db_scheme:
+    description: "Database scheme to be used to access Postgresql"
+  instancemetrics_db.port:
+    description: "Port on which the Postgresql server will listen"
+  instancemetrics_db.roles:
+    description: "The list of database Roles used in Postgresql database including name/password"
+
 
   cf.api:
     description: "the Cloud Foundry API endpoint"

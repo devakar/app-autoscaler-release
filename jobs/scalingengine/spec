@@ -13,17 +13,42 @@ packages:
   - common
 
 properties:
-  databases.address:
+  scaling_db.address:
     description: "IP address on which the Postgresql server will listen"
     default: "postgres.service.cf.internal"
-  databases.databases:
+  scaling_db.databases:
     description: "The list of databases used in Postgresql database including name"
-  databases.db_scheme:
+  scaling_db.db_scheme:
     description: "Database scheme to be used to access Postgresql"
-  databases.port:
+  scaling_db.port:
     description: "Port on which the Postgresql server will listen"
-  databases.roles:
+  scaling_db.roles:
     description: "The list of database Roles used in Postgresql database including name/password"
+
+  policy_db.address:
+    description: "IP address on which the Postgresql server will listen"
+    default: "postgres.service.cf.internal"
+  policy_db.databases:
+    description: "The list of databases used in Postgresql database including name"
+  policy_db.db_scheme:
+    description: "Database scheme to be used to access Postgresql"
+  policy_db.port:
+    description: "Port on which the Postgresql server will listen"
+  policy_db.roles:
+    description: "The list of database Roles used in Postgresql database including name/password"
+
+  scheduler_db.address:
+    description: "IP address on which the Postgresql server will listen"
+    default: "postgres.service.cf.internal"
+  scheduler_db.databases:
+    description: "The list of databases used in Postgresql database including name"
+  scheduler_db.db_scheme:
+    description: "Database scheme to be used to access Postgresql"
+  scheduler_db.port:
+    description: "Port on which the Postgresql server will listen"
+  scheduler_db.roles:
+    description: "The list of database Roles used in Postgresql database including name/password"
+
 
   cf.api:
     description: "the Cloud Foundry API endpoint"
