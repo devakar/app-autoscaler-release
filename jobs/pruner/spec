@@ -9,16 +9,40 @@ packages:
   - common
 
 properties:
-  databases.address:
+  instancemetrics_db.address:
     description: "IP address on which the Postgresql server will listen"
     default: "postgres.service.cf.internal"
-  databases.databases:
+  instancemetrics_db.databases:
     description: "The list of databases used in Postgresql database including name"
-  databases.db_scheme:
+  instancemetrics_db.db_scheme:
     description: "Database scheme to be used to access Postgresql"
-  databases.port:
+  instancemetrics_db.port:
     description: "Port on which the Postgresql server will listen"
-  databases.roles:
+  instancemetrics_db.roles:
+    description: "The list of database Roles used in Postgresql database including name/password"
+
+  appmetrics_db.address:
+    description: "IP address on which the Postgresql server will listen"
+    default: "postgres.service.cf.internal"
+  appmetrics_db.databases:
+    description: "The list of databases used in Postgresql database including name"
+  appmetrics_db.db_scheme:
+    description: "Database scheme to be used to access Postgresql"
+  appmetrics_db.port:
+    description: "Port on which the Postgresql server will listen"
+  appmetrics_db.roles:
+    description: "The list of database Roles used in Postgresql database including name/password"
+
+  scalingengine_db.address:
+    description: "IP address on which the Postgresql server will listen"
+    default: "postgres.service.cf.internal"
+  scalingengine_db.databases:
+    description: "The list of databases used in Postgresql database including name"
+  scalingengine_db.db_scheme:
+    description: "Database scheme to be used to access Postgresql"
+  scalingengine_db.port:
+    description: "Port on which the Postgresql server will listen"
+  scalingengine_db.roles:
     description: "The list of database Roles used in Postgresql database including name/password"
 
 
