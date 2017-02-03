@@ -3,12 +3,12 @@
     p(property,nil) || []
   end
 
-  scaling_db_scheme = p('scaling_db.db_scheme')
-  scaling_db_address = p('scaling_db.address')
-  scaling_db_port = p('scaling_db.port')
-  scaling_db_role = p_arr('scaling_db.roles').find { |role| role['tag'] == 'scalingdb' or role['tag'] == 'default' } 
-  scaling_db_database = p_arr('scaling_db.databases').find { |database| database['tag'] == 'scalingdb' or database['tag'] == 'default' } 
-  scaling_db_url = scaling_db_scheme + "://" + scaling_db_role['name'] + ":" + scaling_db_role['password'] + "@" + scaling_db_address + ":" + scaling_db_port.to_s + "/" + scaling_db_database['name'] + "?sslmode=disable"
+  scaling_engine_db_scheme = p('scaling_db.db_scheme')
+  scaling_engine_db_address = p('scaling_db.address')
+  scaling_engine_db_port = p('scaling_db.port')
+  scaling_engine_db_role = p_arr('scaling_db.roles').find { |role| role['tag'] == 'scalingdb' or role['tag'] == 'default' } 
+  scaling_engine_db_database = p_arr('scaling_db.databases').find { |database| database['tag'] == 'scalingdb' or database['tag'] == 'default' } 
+  scaling_engine_db_url = scaling_engine_db_scheme + "://" + scaling_engine_db_role['name'] + ":" + scaling_engine_db_role['password'] + "@" + scaling_engine_db_address + ":" + scaling_engine_db_port.to_s + "/" + scaling_engine_db_database['name'] + "?sslmode=disable"
 
 
   policy_db_scheme = p('policy_db.db_scheme')
@@ -44,7 +44,7 @@ logging:
 
 db:
   policy_db_url: <%= policy_db_url %>
-  scalingengine_db_url: <%= scaling_db_url %>
+  scalingengine_db_url: <%= scaling_engine_db_url %>
   scheduler_db_url: <%= scheduler_db_url %>
 
 synchronizer:

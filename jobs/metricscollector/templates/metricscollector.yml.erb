@@ -3,19 +3,19 @@
     p(property,nil) || []
   end
 
-  imdb_scheme = p('instancemetrics_db.db_scheme')
-  im_address = p('instancemetrics_db.address')
-  im_db_port = p('instancemetrics_db.port')
-  im_role = p_arr('instancemetrics_db.roles').find { |role| role['tag'] == 'instancemetricsdb' or role['tag'] == 'default' } 
-  im_database = p_arr('instancemetrics_db.databases').find { |database| database['tag'] == 'instancemetricsdb' or database['tag'] == 'default' } 
-  im_dburl = imdb_scheme + "://" + im_role['name'] + ":" + im_role['password'] + "@" + im_address + ":" + im_db_port.to_s + "/" + im_database['name'] + "?sslmode=disable"
+  instance_metrics_db_scheme = p('instancemetrics_db.db_scheme')
+  instance_metrics_db_address = p('instancemetrics_db.address')
+  instance_metrics_db_db_port = p('instancemetrics_db.port')
+  instance_metrics_db_role = p_arr('instancemetrics_db.roles').find { |role| role['tag'] == 'instancemetricsdb' or role['tag'] == 'default' } 
+  instance_metrics_db_database = p_arr('instancemetrics_db.databases').find { |database| database['tag'] == 'instancemetricsdb' or database['tag'] == 'default' } 
+  instance_metrics_db_url = imdb_scheme + "://" + im_role['name'] + ":" + im_role['password'] + "@" + im_address + ":" + im_db_port.to_s + "/" + im_database['name'] + "?sslmode=disable"
 
-  policydb_scheme = p('policy_db.db_scheme')
-  policydb_address = p('policy_db.address')
+  policy_db_scheme = p('policy_db.db_scheme')
+  policy_db_address = p('policy_db.address')
   policy_db_port = p('policy_db.port')
-  policydb_role = p_arr('policy_db.roles').find { |role| role['tag'] == 'policydb' or role['tag'] == 'default'  }
-  policydb_database = p_arr('policy_db.databases').find { |database| database['tag'] == 'policydb' or database['tag'] == 'default' }
-  policy_dburl = policydb_scheme + "://" + policydb_role['name'] + ":" + policydb_role['password'] + "@" + policydb_address + ":" + policy_db_port.to_s + "/" + policydb_database['name'] + "?sslmode=disable"
+  policy_db_role = p_arr('policy_db.roles').find { |role| role['tag'] == 'policydb' or role['tag'] == 'default'  }
+  policy_db_database = p_arr('policy_db.databases').find { |database| database['tag'] == 'policydb' or database['tag'] == 'default' }
+  policy_db_url = policy_db_scheme + "://" + policy_db_role['name'] + ":" + policy_db_role['password'] + "@" + policy_db_address + ":" + policy_db_port.to_s + "/" + policy_db_database['name'] + "?sslmode=disable"
 
 %>
 
@@ -35,8 +35,8 @@ logging:
   level: <%= p("metricscollector.logging.level") %>
 
 db:
-  policy_db_url: <%= policy_dburl %>
-  instance_metrics_db_url: <%= im_dburl %>
+  policy_db_url: <%= policy_db_url %>
+  instance_metrics_db_url: <%= iinstance_metrics_db_url %>
 
 collector:
   refresh_interval: <%= p("metricscollector.collector.refresh_interval") %>

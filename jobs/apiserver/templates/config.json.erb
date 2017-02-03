@@ -9,8 +9,8 @@
   db_port = p('policy_db.port')
   role = p_arr('policy_db.roles').find { |role| role['tag'] == 'policydb' or role['tag'] == 'default'} 
   database = p_arr('policy_db.databases').find { |database| database['tag'] == 'policydb' or database['tag'] == 'default'} 
-  schedulerHost = p('api_server.scheduler_host')
-  schedulerPort = p('api_server.scheduler_port')
+  scheduler_host = p('api_server.scheduler_host')
+  scheduler_port = p('api_server.scheduler_port')
   params = {
     'port' => p('api_server.port'),
     'db' => {
@@ -19,7 +19,7 @@
        'idleTimeout' => p('api_server.db_config.idle_timeout'),
        'uri' => db_scheme + "://" + role['name'] + ":" + role['password'] + "@" + address + ":" + db_port.to_s + "/" + database['name']  ,
      },
-    'schedulerUri' => "http://" + schedulerHost + ":" + schedulerPort.to_s,
+    'schedulerUri' => "http://" + scheduler_host + ":" + scheduler_port.to_s,
   }           
  
 %>
